@@ -1,5 +1,5 @@
 import { module, test } from 'qunit';
-import { setupTest } from 'lokale-bron/tests/helpers';
+import { setupTest } from 'frontend-lokale-bron/tests/helpers';
 
 module('Unit | Route | overview', function (hooks) {
   setupTest(hooks);

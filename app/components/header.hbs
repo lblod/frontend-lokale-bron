@@ -1,0 +1,25 @@
+<AuMainHeader
+  @appTitle="Lokale Bron"
+  @brandLink="#"
+  @homeRoute="overview"
+  class="au-u-background-yellow-300"
+>
+  <li class="au-c-list-horizontal__item">
+    <AuLinkExternal href="#" @skin="secondary">
+      <AuIcon @icon="question-circle" @alignment="left" />
+      Help
+    </AuLinkExternal>
+  </li>
+  <li class="au-c-list-horizontal__item">
+    <AuDropdown
+      @title="{{@username}}"
+      @buttonLabel="Account settings"
+      @alignment="right"
+      role="menu"
+    >
+      <AuLink @route="auth.logout" @icon="logout" role="menuitem">
+        Afmelden
+      </AuLink>
+    </AuDropdown>
+  </li>
+</AuMainHeader>

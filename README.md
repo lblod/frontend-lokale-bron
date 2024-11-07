@@ -15,7 +15,7 @@ You will need the following things properly installed on your computer.
 ## Installation
 
 - `git clone <repository-url>` this repository
-- `cd lokale-bron`
+- `cd frontend-lokale-bron`
 - `npm install`
 
 ## Running / Development

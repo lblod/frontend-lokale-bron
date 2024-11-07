@@ -2,7 +2,7 @@
 
 module.exports = function (environment) {
   const ENV = {
-    modulePrefix: 'lokale-bron',
+    modulePrefix: 'frontend-lokale-bron',
     environment,
     rootURL: '/',
     locationType: 'history',
