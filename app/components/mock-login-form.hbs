@@ -1,0 +1,34 @@
+{{this.nickname}}
+<form class="au-c-form" {{on "submit" this.submitForm}}>
+  <AuFormRow @alignment="pre">
+    <AuLabel class="au-u-1-3" for="nickname" @inline={{true}}>
+      Username
+    </AuLabel>
+    <AuInput
+      id="nickname"
+      type="text"
+      @width="block"
+      @value={{this.nickname}}
+    />
+
+  </AuFormRow>
+  <AuFormRow @alignment="pre">
+    <AuLabel class="au-u-1-3" for="password" @inline={{true}}>
+      Password
+    </AuLabel>
+    <AuInput
+      id="password"
+      type="password"
+      @width="block"
+      @value={{this.password}}
+    />
+  </AuFormRow>
+  <AuButton type="submit" @icon="login" @iconAlignment="left">
+    Login
+  </AuButton>
+</form>
+{{#if this.errorMessage}}
+  <AuAlert @size="small" @icon="alert-triangle" @skin="error">
+    <p>{{this.errorMessage}}</p>
+  </AuAlert>
+{{/if}}

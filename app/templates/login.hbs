@@ -1,0 +1,40 @@
+{{page-title "Login"}}
+{{breadcrumb "Login" route="login"}}
+
+<AuMainContainer as |m|>
+  <m.content @scroll={{true}}>
+    <AuContentHeader
+      @titlePartOne="Vlaanderen"
+      @titlePartTwo="is lokaal bestuur"
+    />
+    <AuContent
+      @skin="large"
+      class="au-u-flex au-u-flex--center-xsmall au-u-flex--vertical-center au-u-height-full"
+    >
+      <div class="au-o-region au-o-layout au-u-max-width-xsmall au-u-1-1">
+        <AuCard
+          @flex={{false}}
+          @textCenter={{false}}
+          @shadow={{true}}
+          @size="regular"
+          @standOut={{false}}
+          @expandable={{false}}
+          @isExpanded={{true}}
+          @isOpenInitially={{true}}
+          @manualControl={{false}}
+          as |c|
+        >
+          <c.header>
+            <AuHeading @level="1" @skin="1">
+              Login
+            </AuHeading>
+          </c.header>
+          <c.content>
+            {{! <MuLogin /> }}
+            <MockLoginForm />
+          </c.content>
+        </AuCard>
+      </div>
+    </AuContent>
+  </m.content>
+</AuMainContainer>
