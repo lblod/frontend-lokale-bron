@@ -1,0 +1,64 @@
+<section
+  class="au-o-region-large au-d-component-block au-d-component-block--overflow"
+  id="search"
+>
+  <div class="au-o-layout">
+    <AuContent>
+      <AuHeading @level="1" class="au-u-margin-bottom-small">Welkom,
+        {{@username}}</AuHeading>
+      <AuLabel class="au-u-h5" for="input">Zoek datainhoud uit lokale bronnen</AuLabel>
+      <div class="au-u-flex au-u--center au-u-margin-top-small">
+        <div class="au-u-1-1 au-u-relative">
+          <AuInput
+            @width="block"
+            @icon={{this.icon}}
+            placeholder="Zoek..."
+            id="search-input"
+            value={{this.searchTerm}}
+            {{on "input" this.updateSearchTerm}}
+            {{on "keydown" this.onKeyPress}}
+            {{on "focus" this.onFocus}}
+            {{on "blur" this.onBlur}}
+            autocomplete="off"
+          />
+          {{#if this.application.filteredApps.length}}
+            <div class="autocomplete-dropdown">
+              <ul>
+                {{#each this.application.filteredApps as |app index|}}
+                  <li>
+                    <AuLink
+                      @skin="link"
+                      @label={{app.name}}
+                      {{on "click" (fn this.selectApp app)}}
+                      class="{{if (eq index this.selectedIndex) 'selected'}}"
+                      aria-selected={{if
+                        (eq index this.selectedIndex)
+                        "true"
+                        "false"
+                      }}
+                    >
+                      {{app.name}}
+                    </AuLink>
+                  </li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/if}}
+        </div>
+        <div class="au-u-margin-left-small">
+          <AuLink
+            @skin="button"
+            @icon="search"
+            aria-label="Search"
+            role="button"
+            tabindex="0"
+            type="button"
+            {{on "click" this.search}}
+          >
+            Search
+          </AuLink>
+        </div>
+      </div>
+    </AuContent>
+  </div>
+</section>

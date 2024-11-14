@@ -1,0 +1,54 @@
+<section class="au-u-background-gray-200">
+  <div class="au-o-region-large au-o-layout au-u-1-1 au-u-height-full">
+    <AuHeading @level="5" @skin="5">Applicaties met lokale data ({{@apps.length}})</AuHeading>
+    <section
+      class="au-o-grid au-o-grid--small au-u-margin-top-small"
+      id="app-cards"
+    >
+      {{#if @isLoading}}
+        <p>Loading...</p>
+      {{else}}
+        {{#each @apps as |app|}}
+          <div class="au-o-grid__item au-u-1-2@small au-u-1-3@medium">
+            <a href={{app.link}} target="_blank" rel="noopener noreferrer">
+              <AuCard @shadow={{true}} as |c|>
+                <c.header>
+                  <div class="au-u-flex au-u-flex--vertical-center">
+                    <AuBadge
+                      class="au-u-margin-bottom-none"
+                      @icon={{app.icon}}
+                      @skin="brand"
+                      @size={{this.size}}
+                      @number={{this.number}}
+                    />
+                    <AuHeading @level="2" @skin="4">
+                      {{app.name}}
+                    </AuHeading>
+                  </div>
+                </c.header>
+                <c.content>
+                  <p>{{app.description}}</p>
+                </c.content>
+                <c.footer>
+                  <p class="au-u-margin-none">
+                    <AuLinkExternal
+                      href={{app.link}}
+                      @skin="button"
+                      @icon="link-external"
+                    >
+                      Meer informatie
+                    </AuLinkExternal>
+                  </p>
+                </c.footer>
+              </AuCard>
+            </a>
+          </div>
+        {{else}}
+          <div class="au-o-grid__item au-u-1-2@small au-u-1-3@medium">
+            <p>Geen applicaties gevonden</p>
+          </div>
+        {{/each}}
+      {{/if}}
+    </section>
+  </div>
+</section>

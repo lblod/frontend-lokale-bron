@@ -1,5 +1,5 @@
 {
-  "name": "lokale-bron",
+  "name": "frontend-lokale-bron",
   "version": "0.0.0",
   "private": true,
   "description": "Small description for lokale-bron goes here",
@@ -13,13 +13,14 @@
   "scripts": {
     "build": "ember build --environment=production",
     "lint": "concurrently \"npm:lint:*(!fix)\" --names \"lint:\"",
-    "lint:css": "stylelint \"**/*.css\"",
+    "lint:css": "stylelint \"**/*.css\" --allow-empty-input",
     "lint:css:fix": "concurrently \"npm:lint:css -- --fix\"",
     "lint:fix": "concurrently \"npm:lint:*:fix\" --names \"fix:\"",
     "lint:hbs": "ember-template-lint .",
     "lint:hbs:fix": "ember-template-lint . --fix",
     "lint:js": "eslint . --cache",
     "lint:js:fix": "eslint . --fix",
+    "lint:dependencies": "ember dependency-lint",
     "start": "ember serve",
     "test": "concurrently \"npm:lint\" \"npm:test:*\" --names \"lint,test:\"",
     "test:ember": "ember test"
@@ -81,18 +82,21 @@
     "ember-fetch": "^8.1.2",
     "ember-load-initializers": "^3.0.1",
     "ember-modifier": "^4.2.0",
+    "ember-mu-login": "^3.0.0",
     "ember-page-title": "^8.2.3",
     "ember-qunit": "^8.1.1",
     "ember-resolver": "^13.0.2",
+    "ember-simple-auth": "^6.1.0",
     "ember-source": "~5.12.0",
     "ember-template-lint": "^6.0.0",
     "ember-welcome-page": "^7.0.2",
-    "eslint": "^9.14.0",
+    "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-ember": "^12.3.1",
     "eslint-plugin-n": "^17.13.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-qunit": "^8.1.2",
+    "fuse.js": "^7.0.0",
     "loader.js": "^4.7.0",
     "prettier": "^3.3.3",
     "qunit": "^2.22.0",
@@ -103,14 +107,15 @@
     "stylelint-prettier": "^5.0.2",
     "tracked-built-ins": "^3.3.0",
     "typescript": "^5.6.3",
-    "webpack": "^5.96.1",
-    "ember-mu-login": "^3.0.0",
-    "ember-simple-auth": "^6.1.0"
+    "webpack": "^5.96.1"
   },
   "engines": {
     "node": "16.* || >= 18"
   },
   "ember": {
     "edition": "octane"
+  },
+  "dependencies": {
+    "ember-cli-dependency-lint": "^2.0.1"
   }
 }
