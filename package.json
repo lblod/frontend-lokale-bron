@@ -114,5 +114,8 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "dependencies": {
+    "ember-cli-dependency-lint": "^2.0.1"
   }
 }
