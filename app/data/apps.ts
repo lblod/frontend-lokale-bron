@@ -20,7 +20,13 @@ export const apps = [
       'Blijf op de hoogte van waar lokale besturen mee bezig zijn en wat er leeft in en rond je omgeving.',
     link: 'https://lokaalbeslist.vlaanderen.be/',
   },
-
+  {
+    name: 'Lokaal mandatenbeheer',
+    icon: 'archive',
+    description:
+      'Is een applicatie die aan lokale besturen aangeboden wordt om het beheren en rapporteren van mandaten, mandatarissen en organen makkelijker te maken',
+    link: 'https://lokaalbeslist.vlaanderen.be/',
+  },
   {
     name: 'Open Data Platform',
     icon: 'archive',
