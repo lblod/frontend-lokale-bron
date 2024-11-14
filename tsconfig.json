@@ -9,8 +9,8 @@
     // work with TypeScript.
     "baseUrl": ".",
     "paths": {
-      "frontend-lokale-bronnen/tests/*": ["tests/*"],
-      "frontend-lokale-bronnen/*": ["app/*"],
+      "frontend-lokale-bron/tests/*": ["tests/*"],
+      "frontend-lokale-bron/*": ["app/*"],
       "*": ["types/*"]
     },
     "inlineSourceMap": true,

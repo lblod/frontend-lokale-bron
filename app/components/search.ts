@@ -1,57 +1,108 @@
 import { action } from '@ember/object';
-import type RouterService from '@ember/routing/router-service';
 import { service } from '@ember/service';
 import Component from '@glimmer/component';
 import { tracked } from '@glimmer/tracking';
+import type { AppsType } from 'frontend-lokale-bron/services/application';
+import type ApplicationService from 'frontend-lokale-bron/services/application';
 
-interface SearchArgs {
-  apps: AppsType[];
-}
-interface AppsType {
-  name: string;
-  icon: string;
-  description: string;
-  link: string;
-}
-
-export default class SearchComponent extends Component<SearchArgs> {
+export default class SearchComponent extends Component<{}> {
+  @service application!: ApplicationService;
   @tracked searchTerm: string = '';
-  @tracked filteredApps: Array<{ name: string }> = [];
-
-  get apps() {
-    return this.args.apps || [];
-  }
+  @tracked selectedIndex: number = -1;
+  @tracked isDropdownFocused: boolean = false;
 
   @action
   updateSearchTerm(event: Event): void {
     const input = event.target as HTMLInputElement;
     this.searchTerm = input.value;
-    this.filterApps(input.value);
+    this.application.filterApps(this.searchTerm);
   }
 
-  filterApps(searchTerm: string) {
-    if (searchTerm) {
-      this.filteredApps = this.apps.filter((app) =>
-        app.name.toLowerCase().includes(searchTerm.toLowerCase()),
-      );
-    } else {
-      this.filteredApps = [];
+  @action
+  selectApp(selectedApp: AppsType): void {
+    this.searchTerm = selectedApp.name;
+    this.application.filterApps(this.searchTerm, true);
+    this.resetFilteredApps();
+  }
+
+  @action
+  resetFilteredApps(): void {
+    this.application.filteredApps = [];
+    this.selectedIndex = -1;
+  }
+  @action
+  search(): void {
+    this.application.filterApps(this.searchTerm, true);
+    this.resetFilteredApps();
+  }
+  @action
+  onKeyPress(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      if (
+        this.selectedIndex >= 0 &&
+        this.application.filteredApps[this.selectedIndex]
+      ) {
+        this.selectApp(
+          this.application.filteredApps[this.selectedIndex] as AppsType,
+        );
+      } else {
+        this.search();
+      }
+    } else if (event.key === 'ArrowDown') {
+      event.preventDefault();
+      this.selectNextApp();
+    } else if (event.key === 'ArrowUp') {
+      event.preventDefault();
+      this.selectPreviousApp();
     }
   }
 
-  // Handle selecting an app from the autocomplete list
   @action
-  selectApp(app: { name: string }) {
-    this.searchTerm = app.name; // Update the search term with the selected app's name
-    this.filteredApps = []; // Hide the autocomplete list
-    // Optionally trigger a search or navigate to app details page
-    console.log('Selected app:', app.name);
+  selectNextApp(): void {
+    if (this.selectedIndex < this.application.filteredApps.length - 1) {
+      this.selectedIndex++;
+      this.scrollToSelected();
+    }
   }
 
-  // Trigger search action (can be customized as needed)
   @action
-  search() {
-    this.searchTerm = this.searchTerm;
-    this.filteredApps = [];
+  selectPreviousApp(): void {
+    if (this.selectedIndex > 0) {
+      this.selectedIndex--;
+      this.scrollToSelected();
+    }
+  }
+
+  @action
+  onFocus(): void {
+    this.application.filterApps(this.searchTerm);
+  }
+
+  @action
+  onBlur(): void {
+    if (!this.isDropdownFocused) {
+      setTimeout(() => {
+        this.resetFilteredApps();
+      }, 100);
+    }
+    this.isDropdownFocused = false;
+  }
+
+  @action
+  onDropdownClick(): void {
+    this.isDropdownFocused = true;
+  }
+
+  @action
+  scrollToSelected(): void {
+    const dropdown = document.querySelector('.autocomplete-dropdown ul');
+    const selectedItem = dropdown?.children[this.selectedIndex];
+
+    if (selectedItem) {
+      selectedItem.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      });
+    }
   }
 }

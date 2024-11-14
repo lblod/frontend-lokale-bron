@@ -16,17 +16,26 @@
             id="search-input"
             value={{this.searchTerm}}
             {{on "input" this.updateSearchTerm}}
+            {{on "keydown" this.onKeyPress}}
+            {{on "focus" this.onFocus}}
+            {{on "blur" this.onBlur}}
             autocomplete="off"
           />
-          {{#if this.filteredApps.length}}
+          {{#if this.application.filteredApps.length}}
             <div class="autocomplete-dropdown">
               <ul>
-                {{#each this.filteredApps as |app|}}
+                {{#each this.application.filteredApps as |app index|}}
                   <li>
                     <AuLink
                       @skin="link"
                       @label={{app.name}}
                       {{on "click" (fn this.selectApp app)}}
+                      class="{{if (eq index this.selectedIndex) 'selected'}}"
+                      aria-selected={{if
+                        (eq index this.selectedIndex)
+                        "true"
+                        "false"
+                      }}
                     >
                       {{app.name}}
                     </AuLink>
@@ -50,8 +59,6 @@
           </AuLink>
         </div>
       </div>
-
     </AuContent>
-
   </div>
 </section>

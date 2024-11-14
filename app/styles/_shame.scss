@@ -25,15 +25,18 @@
   position: absolute;
   top: 38px;
   max-height: 200px;
+  overflow: auto;
   width: 100%;
   background-color: white;
   z-index: 1;
   border-radius: 5px;
   border: 0.1rem solid var(--au-gray-300);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   ul {
     margin-left: 0px !important;
     li {
       list-style: none;
+      margin-top: 0px !important;
       a {
         display: block;
         color: black;
@@ -44,6 +47,12 @@
         padding: 0.5rem 1.2rem;
         border-bottom: 0.1rem solid var(--au-gray-300);
         &:hover {
+          background-color: var(--au-gray-100);
+          .selected {
+            background-color: transparent;
+          }
+        }
+        &.selected {
           background-color: var(--au-gray-100);
         }
       }

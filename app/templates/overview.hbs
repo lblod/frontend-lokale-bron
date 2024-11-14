@@ -1,10 +1,16 @@
 {{page-title "Overview"}}
-<Header @username={{this.username}} @isAuthenticated={{this.isAuthenticated}} />
 <AuApp>
-  <AuBodyContainer @scroll={{this.scroll}}>
-    <Search @username={{this.username}} @apps={{this.apps}} />
+  <Header
+    @username={{this.username}}
+    @isAuthenticated={{this.isAuthenticated}}
+  />
+  <AuBodyContainer @scroll={{this.scroll}} class="au-c-body-container--scroll">
+    <Search @username={{this.username}} />
     <AuHr class="au-u-margin-none" />
-    <AppCards @apps={{this.apps}} />
+    <AppCards
+      @apps={{this.application.applications}}
+      @isLoading={{this.application.isLoading}}
+    />
   </AuBodyContainer>
+  <Footer />
 </AuApp>
-<Footer />

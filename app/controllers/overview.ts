@@ -1,26 +1,11 @@
 import Controller from '@ember/controller';
 import { service } from '@ember/service';
-import type MockUserSessionService from 'frontend-lokale-bronnen/services/mock-user-session';
-
-const apps = [
-  {
-    name: 'Validatie Tool',
-    icon: 'user-check',
-    description:
-      'Een tool voor het valideren van een agenda, besluitenlijst of notulen.',
-    link: 'https://www.vlaanderen.be/nl',
-  },
-  {
-    name: 'Data monitoring tool',
-    icon: 'archive',
-    description:
-      'Een tool die vertegenwoordigers van lokale overheden, softwareleveranciers en ABB (het agentschap) informeert over de kwaliteit van de gegevens die door lokale overheden worden gepubliceerd.',
-    link: 'https://www.vlaanderen.be/nl',
-  },
-];
+import type ApplicationService from 'frontend-lokale-bron/services/application';
+import type MockUserSessionService from 'frontend-lokale-bron/services/mock-user-session';
 
 export default class OverviewController extends Controller {
   @service mockUserSession!: MockUserSessionService;
+  @service application!: ApplicationService;
 
   get username(): string | null {
     return this.mockUserSession.getNickname();
@@ -28,8 +13,5 @@ export default class OverviewController extends Controller {
 
   get isAuthenticated(): boolean {
     return this.mockUserSession.isLoggedIn();
-  }
-  get apps() {
-    return apps;
   }
 }
